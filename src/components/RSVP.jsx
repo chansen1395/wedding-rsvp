@@ -7,47 +7,81 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-// import MuiImageSlider from "mui-image-slider";
+import RegistryCard from "./RegistryCard";
+import MuiImageSlider from "mui-image-slider";
 
 import useStyles from "../config/theme.signinup";
+// import { Checkbox } from "@material-ui/core";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+
+import beach from "../img/beach.jpg";
+import drivein from "../img/drivein.jpg";
+import proposal from "../img/proposal.jpg";
+import hawaii from "../img/hawaii.jpg";
+import multnomah from "../img/multnomah.jpg";
+import gardens from "../img/gardens.jpg";
+import hiking from "../img/hiking.png";
+import mirrorlake from "../img/mirrorlake.jpg";
+
+// require('dotenv').config();
 
 // export const RSVP = () => {
 const RSVP = () => {
   const classes = useStyles();
   const form = useRef();
+  const images = [
+    proposal,
+    hawaii,
+    beach,
+    gardens,
+    mirrorlake,
+    drivein,
+    multnomah,
+    hiking,
+  ];
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "service_fp25jfp",
-        "contact_template_satg",
-        form.current,
-        "user_pR7qUbAWiWbrbBKSdeVhS"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
+    if (process.env.REACT_APP_ACCESS_CODE === form.current.access_code.value) {
+      emailjs
+        .sendForm(
+          process.env.REACT_APP_SERVICE,
+          process.env.REACT_APP_TEMPLATE,
+          form.current,
+          process.env.REACT_APP_USER_ID
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+      // then navigate to a thank you page with registry links.
+      e.target.reset();
+      alert(
+        "Thank you for your RSVP! You may close this window or explore the photos/registry."
       );
-    e.target.reset();
+    } else {
+      alert("Please check your access code and inputs before trying again.");
+      // e.target.reset();
+    }
   };
 
   // const images = [icestorm, wildfires, rainbow];
   return (
     <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      {/* <Grid item xs={false} sm={4} md={7} container alignItems="center">
-        <MuiImageSlider images={images} />
-      </Grid> */}
+      {/* <Grid item xs={3} sm={4} md={2} component={Paper} elevation={6} square /> */}
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
-            Contact Us - Request a visit
+            June 4th, 2022
+            <br></br>
+            RSVP - Esperanza and Connor's Wedding
           </Typography>
           <form
             // className={classes.form}
@@ -60,7 +94,16 @@ const RSVP = () => {
               margin="normal"
               required
               fullWidth
-              label="Name"
+              label="Access Code from invitation (case sensitive):"
+              name="access_code"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Your Name:"
               name="name"
               autoFocus
             />
@@ -70,34 +113,22 @@ const RSVP = () => {
               required
               fullWidth
               label="Email Address"
+              placeholder="your-email@address.com"
               name="email"
               autoFocus
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              label="Group Name"
-              name="group_name"
-              autoFocus
-            />
+
             <TextField
               type="number"
               step={1}
+              min={1}
+              max={5}
               variant="outlined"
               margin="normal"
+              required
               fullWidth
-              label="Group Size"
+              label="Including yourself/selves, total number attending?"
               name="group_size"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              type="date"
-              fullWidth
-              label="Planned date of visit"
-              name="visit_date"
               autoFocus
             />
             <TextField
@@ -106,10 +137,30 @@ const RSVP = () => {
               multiline
               rows={5}
               fullWidth
-              name="notes"
-              label="Describe any planned activities or anything else you'd like to share."
+              name="attendees"
+              label="Names of all attendees?"
               type="textarea"
             />
+            <br></br>
+            <br></br>
+
+            <RadioGroup
+              aria-label="attendance"
+              // defaultValue="yes"
+              name="will_attend"
+              required
+            >
+              <FormControlLabel
+                value="yes"
+                control={<Radio />}
+                label="Can attend"
+              />
+              <FormControlLabel
+                value="no"
+                control={<Radio />}
+                label="Cannot attend"
+              />
+            </RadioGroup>
             <Button
               type="submit"
               fullWidth
@@ -117,10 +168,22 @@ const RSVP = () => {
               color="primary"
               className={classes.submit}
             >
-              Send
+              RSVP!
             </Button>
           </form>
         </div>
+      </Grid>
+      {/* <Grid item xs={false} sm={4} md={6} className={classes.image}>
+      <MuiImageSlider images={images} /> */}
+      <Grid item xs={12} sm={4} md={4}>
+        <CssBaseline />
+        <Grid item xs={12} sm={0} md={0}>
+          {/* <MuiImageSlider images={images} /> */}
+          <RegistryCard />
+          <MuiImageSlider autoPlay fitToImageHeight={true} images={images} />
+        </Grid>
+        {/* <Grid item xs={12} sm={0} md={6}>
+        </Grid> */}
       </Grid>
     </Grid>
   );
