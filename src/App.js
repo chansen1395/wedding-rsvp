@@ -15,7 +15,7 @@ function App() {
     <Router>
       <ThemeProvider theme={theme}>
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/wedding-rsvp">
             <RSVP />
           </Route>
         </Switch>

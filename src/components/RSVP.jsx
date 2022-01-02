@@ -175,9 +175,9 @@ const RSVP = () => {
       </Grid>
       {/* <Grid item xs={false} sm={4} md={6} className={classes.image}>
       <MuiImageSlider images={images} /> */}
-      <Grid item xs={12} sm={4} md={4}>
+      <Grid item xs={12} sm={12} md={4}>
         <CssBaseline />
-        <Grid item xs={12} sm={0} md={0}>
+        <Grid item xs={12} sm={12} md={12}>
           {/* <MuiImageSlider images={images} /> */}
           <RegistryCard />
           <MuiImageSlider autoPlay fitToImageHeight={true} images={images} />
