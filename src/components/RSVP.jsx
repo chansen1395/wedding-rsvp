@@ -75,7 +75,6 @@ const RSVP = () => {
   // const images = [icestorm, wildfires, rainbow];
   return (
     <Grid container component="main" className={classes.root}>
-      {/* <Grid item xs={3} sm={4} md={2} component={Paper} elevation={6} square /> */}
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
@@ -173,17 +172,12 @@ const RSVP = () => {
           </form>
         </div>
       </Grid>
-      {/* <Grid item xs={false} sm={4} md={6} className={classes.image}>
-      <MuiImageSlider images={images} /> */}
       <Grid item xs={12} sm={12} md={4}>
         <CssBaseline />
         <Grid item xs={12} sm={12} md={12}>
-          {/* <MuiImageSlider images={images} /> */}
           <RegistryCard />
           <MuiImageSlider autoPlay fitToImageHeight={true} images={images} />
         </Grid>
-        {/* <Grid item xs={12} sm={0} md={6}>
-        </Grid> */}
       </Grid>
     </Grid>
   );
