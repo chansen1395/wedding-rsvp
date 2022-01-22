@@ -24,6 +24,7 @@ import multnomah from "../img/multnomah.jpg";
 import gardens from "../img/gardens.jpg";
 import hiking from "../img/hiking.png";
 import mirrorlake from "../img/mirrorlake.jpg";
+import FAQCard from "./FAQ";
 
 // require('dotenv').config();
 
@@ -137,7 +138,7 @@ const RSVP = () => {
               rows={5}
               fullWidth
               name="attendees"
-              label="Names of all attendees?"
+              label="Names of all attendees & additional notes"
               type="textarea"
             />
             <br></br>
@@ -176,7 +177,9 @@ const RSVP = () => {
         <CssBaseline />
         <Grid item xs={12} sm={12} md={12}>
           <RegistryCard />
-          <MuiImageSlider autoPlay fitToImageHeight={true} images={images} />
+          <FAQCard />
+          {/* <MuiImageSlider autoPlay fitToImageHeight={true} images={images} /> */}
+          <MuiImageSlider fitToImageHeight={true} images={images} />
         </Grid>
       </Grid>
     </Grid>

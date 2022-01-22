@@ -14,13 +14,15 @@ export const card = (
         Registries:
       </Typography>
       <Typography sx={{ mb: 1.5 }} variant="body2">
-        Please feel free to go off-registry;
+        Please do not feel constrained by our registry;
         <br></br>
         any and all gifts are very much appreciated!
       </Typography>
     </CardContent>
     <CardActions>
       <Button size="small" href="https://www.bedbathandbeyond.com/store/giftregistry/viewregistryguest/550991665?eventType=Wedding">Bed Bath & Beyond</Button>
+      <br></br>
+      <Button size="small" href="https://www.amazon.com/wedding/esperanza-zavala-connor-hansen--june-2022/registry/2FTU1HBPN6HA0?fbclid=IwAR3wkwD1RA8T0b1j8PmKPDpPeUVX1OI3mU6BVg3Js1rJ55o7Uz7rH55t7os">Amazon</Button>
     </CardActions>
   </React.Fragment>
 );
